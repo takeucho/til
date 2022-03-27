@@ -5,6 +5,12 @@
 
 ![alt](https://github.com/takeucho/til/blob/main/images/fsx-ontap-nextcloud.png)
 
+#### 対象読者
+FSx for ONTAP、Amazon RDS、Amazon Elastic Load Balancing、Amazon ElastiCache、NextCloud の知識を有している人。
+
+#### この記事で説明しないこと
+各手順の詳細は説明していません。
+
 ## FSx for ONTAP の構築
 下記ワークショップの AWS Cloud Formation テンプレートを使用することで、Active Directory 含めた FSx for ONTAP 環境を構築できます。
 https://github.com/aws-samples/amazon-fsx-workshop/tree/master/netapp-ontap/JP
@@ -12,6 +18,9 @@ https://github.com/aws-samples/amazon-fsx-workshop/tree/master/netapp-ontap/JP
 ## Nextcloud サーバの構築
 下記 Nextcloud のドキュメントを参照し、Ubuntu 20.04 LTS のAmazon EC2 インスタンスにNextcloudをインストールします。
 https://docs.nextcloud.com/server/latest/admin_manual/installation/example_ubuntu.html
+
+#### 注意点
+Snap Packageを使用してインストールした場合、NextCloudにSMBファイルサーバをマウントさせることはできませんでした。
 
 ## Amazon RDS の構築
 上記で構築した Nextcloud サーバのデータベースを Amazon RDS に置きかえるため、下記ドキュメントを参照して Amazon RDS を構築します。
