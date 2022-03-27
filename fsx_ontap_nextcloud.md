@@ -6,7 +6,7 @@
 ![alt](https://github.com/takeucho/til/blob/main/images/fsx-ontap-nextcloud.png)
 
 #### 対象読者
-FSx for ONTAP、Amazon RDS、Amazon Elastic Load Balancing、Amazon ElastiCache、NextCloud の知識を有している人。
+FSx for ONTAP、Amazon RDS、Amazon Elastic Load Balancing、Amazon ElastiCache、Nextcloud の知識を有している人。
 
 #### この記事で説明しないこと
 各手順の詳細は説明していません。
