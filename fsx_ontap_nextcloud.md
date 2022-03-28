@@ -1,6 +1,6 @@
 # Amazon FSx for NetApp ONTAP と Nextcloud で実現するファイルサーバ兼クラウドストレージ環境
 
-この記事では Amazon FSx for NetApp ONTAP と Nextcloud を使って、ファイルサーバ兼クラウドストレージとしてシームレスに使える環境構築の概要手順と構築時の注意点を紹介します。
+この記事では Amazon FSx for NetApp ONTAP と Nextcloud を使って、SMBファイルサーバ兼クラウドストレージとしてシームレスに使える環境構築の概要手順と構築時の注意点を紹介します。
 最終的な想定構成は以下となります（本記事ではオンプレミス環境からのアクセスに関する設定については記載していません）。
 
 ![alt](https://github.com/takeucho/til/blob/main/images/fsx-ontap-nextcloud.png)
@@ -16,7 +16,9 @@ FSx for ONTAP、Amazon RDS、Amazon Elastic Load Balancing、Amazon ElastiCache�
 https://github.com/aws-samples/amazon-fsx-workshop/tree/master/netapp-ontap/JP
 
 下記共有を１つずつ作成します。
+
 ・NFS共有
+
 ・SMB共有
 
 ## Nextcloud サーバの構築
@@ -26,16 +28,26 @@ https://docs.nextcloud.com/server/latest/admin_manual/installation/example_ubunt
 #### 注意点
 Snap Packageを使用してインストールした場合、NextCloudをインストールしているUbuntuへのcifs-utilsのインストールがうまくいかなかったため、FSx for ONTAPなどのSMBファイルサーバをマウントさせることはできませんでした。
 
-## Nextcloud のファイルディレクトリとして FSx for ONTAP の NFS 共有を使用する
-今回、NextCloud は 2 台の EC2 で冗長化するため、コンテンツを格納する下記ファイルディレクトリとして FSx for ONTAP の NFS 共有を使用する設定を行います。
+## Nextcloud の標準ファイルディレクトリとして FSx for ONTAP の NFS 共有を使用する
+今回、NextCloud は 2 台の EC2 で冗長化するため、標準コンテンツを格納する下記ファイルディレクトリとして FSx for ONTAP の NFS 共有を使用する設定を行います。
 
 `/var/www/nextcloud/data/`
 
+NFS マウントに必要なツールをインストールします。
+
+`sudo apt install nfs-common`
+
+元のファイルディレクトリの中身を退避させます。
+
+`sudo mv /var/www/nextcloud/data/ /var/www/nextcloud/data_back`
+`sudo mkdir /var/www/nextcloud/data/`
+
+FSx for ONTAP を NFS マウントします。
 FSx for ONTAP の NFS IP アドレス = 198.19.255.130 の場合
 
 `sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 198.19.255.130:/vol1 /var/www/nextcloud/data/`
 
-自動マウントの設定
+自動マウントの設定を行います。
 
 `sudo echo "198.19.255.130:/vol1 /var/www/nextcloud/data/ nfs4 defaults 0 0" >> /etc/fstab`
 
@@ -43,6 +55,10 @@ FSx for ONTAP の NFS IP アドレス = 198.19.255.130 の場合
 上記で構築した Nextcloud サーバのデータベースを Amazon RDS に置きかえるため、下記ドキュメントを参照して Amazon RDS を構築します。
 
 https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateDBInstance.html
+
+Nextcloudをインストールした Ubuntu に Maria DB クライアントをインストールします。
+
+`sudo apt install -y mariadb-client`
 
 ## Amazon Elastic Load Balancing の構築
 Nextcloud サーバを冗長化するため、下記ドキュメントを参照して Amazon Elastic Load Balancing を構築します。
