@@ -29,9 +29,7 @@ https://docs.nextcloud.com/server/latest/admin_manual/installation/example_ubunt
 Snap Packageを使用してインストールした場合、NextCloudをインストールしているUbuntuへのcifs-utilsのインストールがうまくいかなかったため、FSx for ONTAPなどのSMBファイルサーバをマウントさせることはできませんでした。
 
 ## Nextcloud の標準ファイルディレクトリとして FSx for ONTAP の NFS 共有を使用する
-今回、NextCloud は 2 台の EC2 で冗長化するため、標準コンテンツを格納する下記ファイルディレクトリとして FSx for ONTAP の NFS 共有を使用する設定を行います。
-
-`/var/www/nextcloud/data/`
+今回、NextCloud は 2 台の EC2 で冗長化するため、標準コンテンツを格納するファイルディレクトリ（ /var/www/nextcloud/data/ ）として FSx for ONTAP の NFS 共有を使用する設定を行います。
 
 NFS マウントに必要なツールをインストールします。
 
@@ -40,6 +38,7 @@ NFS マウントに必要なツールをインストールします。
 元のファイルディレクトリの中身を退避させます。
 
 `sudo mv /var/www/nextcloud/data/ /var/www/nextcloud/data_back`
+
 `sudo mkdir /var/www/nextcloud/data/`
 
 FSx for ONTAP を NFS マウントします。
