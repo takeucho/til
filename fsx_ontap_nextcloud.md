@@ -15,6 +15,10 @@ FSx for ONTAP、Amazon RDS、Amazon Elastic Load Balancing、Amazon ElastiCache�
 下記ワークショップの AWS Cloud Formation テンプレートを使用することで、Active Directory 含めた FSx for ONTAP 環境を構築できます。
 https://github.com/aws-samples/amazon-fsx-workshop/tree/master/netapp-ontap/JP
 
+下記共有を１つずつ作成します。
+・NFS共有
+・SMB共有
+
 ## Nextcloud サーバの構築
 下記 Nextcloud のドキュメントを参照し、Ubuntu 20.04 LTS のAmazon EC2 インスタンスにNextcloudをインストールします。
 https://docs.nextcloud.com/server/latest/admin_manual/installation/example_ubuntu.html
@@ -22,8 +26,22 @@ https://docs.nextcloud.com/server/latest/admin_manual/installation/example_ubunt
 #### 注意点
 Snap Packageを使用してインストールした場合、NextCloudをインストールしているUbuntuへのcifs-utilsのインストールがうまくいかなかったため、FSx for ONTAPなどのSMBファイルサーバをマウントさせることはできませんでした。
 
+## Nextcloud のファイルディレクトリとして FSx for ONTAP の NFS 共有を使用する
+今回、NextCloud は 2 台の EC2 で冗長化するため、コンテンツを格納する下記ファイルディレクトリとして FSx for ONTAP の NFS 共有を使用する設定を行います。
+
+`/var/www/nextcloud/data/`
+
+FSx for ONTAP の NFS IP アドレス = 198.19.255.130 の場合
+
+`sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 198.19.255.130:/vol1 /var/www/nextcloud/data/`
+
+自動マウントの設定
+
+`sudo echo "198.19.255.130:/vol1 /var/www/nextcloud/data/ nfs4 defaults 0 0" >> /etc/fstab`
+
 ## Amazon RDS の構築
 上記で構築した Nextcloud サーバのデータベースを Amazon RDS に置きかえるため、下記ドキュメントを参照して Amazon RDS を構築します。
+
 https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateDBInstance.html
 
 ## Amazon Elastic Load Balancing の構築
