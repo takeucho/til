@@ -26,7 +26,7 @@ https://github.com/aws-samples/amazon-fsx-workshop/tree/master/netapp-ontap/JP
 https://docs.nextcloud.com/server/latest/admin_manual/installation/example_ubuntu.html
 
 #### 注意点
-Snap Packageを使用してインストールした場合、NextCloudをインストールしているUbuntuへのcifs-utilsのインストールがうまくいかなかったため、FSx for ONTAPなどのSMBファイルサーバをマウントさせることはできませんでした。
+Snap Package を使用してインストールした場合、NextCloud をインストールしている Ubuntu への cifs-utils のインストールがうまくいかなかったため、FSx for ONTAP などの SMB ファイルサーバをマウントさせることはできませんでした。
 
 ## Nextcloud の標準ファイルディレクトリとして FSx for ONTAP の NFS 共有を使用する
 今回、NextCloud は 2 台の EC2 で冗長化するため、標準コンテンツを格納するファイルディレクトリ（ /var/www/nextcloud/data/ ）として FSx for ONTAP の NFS 共有を使用する設定を行います。
@@ -49,6 +49,11 @@ FSx for ONTAP の NFS IP アドレス = 198.19.255.130 の場合
 自動マウントの設定を行います。
 
 `sudo echo "198.19.255.130:/vol1 /var/www/nextcloud/data/ nfs4 defaults 0 0" >> /etc/fstab`
+
+退避させていたファイルを元のディレクトリに戻します。
+
+`sudo cp -piR /var/www/nextcloud/data_back/. /var/www/nextcloud/data`
+
 
 ## Amazon RDS の構築
 上記で構築した Nextcloud サーバのデータベースを Amazon RDS に置きかえるため、下記ドキュメントを参照して Amazon RDS を構築します。
