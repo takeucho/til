@@ -20,7 +20,7 @@ https://github.com/aws-samples/amazon-fsx-workshop/tree/master/netapp-ontap/JP
 https://docs.nextcloud.com/server/latest/admin_manual/installation/example_ubuntu.html
 
 #### 注意点
-Snap Packageを使用してインストールした場合、NextCloudにSMBファイルサーバをマウントさせることはできませんでした。
+Snap Packageを使用してインストールした場合、NextCloudをインストールしているUbuntuへのcifs-utilsのインストールがうまくいかなかったため、FSx for ONTAPなどのSMBファイルサーバをマウントさせることはできませんでした。
 
 ## Amazon RDS の構築
 上記で構築した Nextcloud サーバのデータベースを Amazon RDS に置きかえるため、下記ドキュメントを参照して Amazon RDS を構築します。
