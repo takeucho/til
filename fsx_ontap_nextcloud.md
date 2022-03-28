@@ -41,8 +41,7 @@ NFS マウントに必要なツールをインストールします。
 
 `sudo mkdir /var/www/nextcloud/data/`
 
-FSx for ONTAP を NFS マウントします。
-FSx for ONTAP の NFS IP アドレス = 198.19.255.130 の場合
+FSx for ONTAP を NFS マウントします（FSx for ONTAP の NFS IP アドレス = 198.19.255.130 の場合）。
 
 `sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport 198.19.255.130:/vol1 /var/www/nextcloud/data/`
 
