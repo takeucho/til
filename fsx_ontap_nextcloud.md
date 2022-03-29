@@ -68,6 +68,20 @@ Nextcloudをインストールした Ubuntu に SMB マウントに必要なツ�
 
 `sudo service apache2 start`
 
+Nextcloud で Active Directory への参加と SMB マウントできるようにアプリケーションをインストールします。
+Nextcloud の管理者権限で GUI からログインし、Apps から "LDAP user and group backend" と "External storage support" をインストールします。
+
+![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_apps.png)
+
+設定画面の "LDAP/AD integration" から Active Directory への参加設定を行います。
+その後、 設定画面の Administration の "External storage" から外部ストレージの設定として FSx for ONTAP をマウントする設定を行います。
+また、"Allow users to mount external storage" と "SMB/CIFS" にチェックを入れることで、各ユーザ自身が自身のホームフォルダをマウントできるようになります。
+
+![alt](https://github.com/takeucho/til/blob/main/images/external_storage.png)
+
+上記設定を行うことで、Nextcloud の Files 画面で FSx for ONTAP の SMB 共有が "FSxN" として表示され、アクセスできるようになります。
+
+![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_files.png)
 
 ## Amazon RDS の構築
 上記で構築した Nextcloud サーバのデータベースを Amazon RDS に置きかえるため、下記ドキュメントを参照して Amazon RDS を構築します。
