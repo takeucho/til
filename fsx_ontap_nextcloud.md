@@ -5,6 +5,8 @@
 
 ![alt](https://github.com/takeucho/til/blob/main/images/fsx-ontap-nextcloud.png)
 
+本記事は個人が作成したものであり、AWS社やNextcloud社とは一切関係ありません。
+
 #### 対象読者
 FSx for ONTAP、Amazon RDS、Amazon Elastic Load Balancing、Amazon ElastiCache、Nextcloud の知識を有している人。
 
@@ -76,12 +78,38 @@ Nextcloudをインストールした Ubuntu に Maria DB クライアントを�
 
 `sudo apt install -y mariadb-client`
 
+## Amazon ElastiCache の構築
+メモリキャッシュを利用して高速化するために、下記ドキュメントを参照して Amazon ElastiCache を Redis で構築します。
+https://aws.amazon.com/jp/getting-started/hands-on/building-fast-session-caching-with-amazon-elasticache-for-redis/1/
+
+Redis の設定を config.php に追加します。
+
+`sudo vi /var/www/nextcloud/config/config.php`
+
+~~~
+'memcache.distributed' => '\OC\Memcache\Redis',
+  'memcache.locking' => '\\OC\\Memcache\\Redis',
+  'redis' => [
+     'host' => 'nextcloud-redis.z6btfm.ng.0001.apne1.cache.amazonaws.com',
+     'port' => 6379,
+~~~
+
 ## Amazon Elastic Load Balancing の構築
 Nextcloud サーバを冗長化するため、下記ドキュメントを参照して Amazon Elastic Load Balancing を構築します。
 https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/create-application-load-balancer.html
 
-## Amazon ElastiCache の構築
-メモリキャッシュを利用して高速化するために、下記ドキュメントを参照して Amazon ElastiCache を構築します。
-https://aws.amazon.com/jp/getting-started/hands-on/building-fast-session-caching-with-amazon-elasticache-for-redis/1/
+Elastic Load Balancing の設定を config.php に追加します。
+
+`sudo vi /var/www/nextcloud/config/config.php`
+
+~~~
+'trusted_proxies' =>
+array (
+0 => '10.11.0.0/16',
+),
+'overwriteprotocol' => 'https',
+'overwritehost' => 'ec2-13-230-9-117.ap-northeast-1.compute.amazonaws.com',
+~~~
+
 
 ## Nextcloud の設定
