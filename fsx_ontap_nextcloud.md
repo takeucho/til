@@ -111,6 +111,8 @@ Nextcloud の管理者権限で GUI からログインし、Apps から "LDAP us
 
 ![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_files.png)
 
+これにより、Nextcloud から FSxN フォルダに書き込んだファイルは Windows からマウントしている同一の SMB 共有から読み取り・変更ができます。また、同様に Windows のエクスプローラから SMB 共有に対して書き込んだファイルは、Nextcloud の FSxN フォルダで読み取り・変更ができます。 Nextcloud と Windows で同一の Active Directory に参加しているため、アクセス権限も機能します。
+
 ## Amazon Elastic Load Balancing の構築
 Nextcloud サーバを冗長化するため、下記ドキュメントを参照して Amazon Elastic Load Balancing を構築します。
 https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/create-application-load-balancer.html
