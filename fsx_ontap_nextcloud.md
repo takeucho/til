@@ -31,7 +31,7 @@ Snap Package を使用してインストールした場合、NextCloud をイン
 ## Nextcloud の標準ファイルディレクトリとして FSx for ONTAP の NFS 共有を使用する
 今回、NextCloud は 2 台の EC2 で冗長化するため、標準コンテンツを格納するファイルディレクトリ（ /var/www/nextcloud/data/ ）として FSx for ONTAP の NFS 共有を使用する設定を行います。
 
-NFS マウントに必要なツールをインストールします。
+Nextcloudをインストールした Ubuntu に NFS マウントに必要なツールをインストールします。
 
 `sudo apt install nfs-common`
 
@@ -52,6 +52,19 @@ FSx for ONTAP を NFS マウントします（FSx for ONTAP の NFS IP アドレ
 退避させていたファイルを元のディレクトリに戻します。
 
 `sudo cp -piR /var/www/nextcloud/data_back/. /var/www/nextcloud/data`
+
+## Nextcloud でSMB 共有を使用する
+上記の　NFS　共有だけでも Nextcloud を FSx for ONTAP をバックエンドストレージとしたクラウドストレージとして利用することができます。しかし、今回は Windows クライアントから使用したいため、FSx for ONTAP を SMB マウントできるように設定します。
+
+Nextcloudをインストールした Ubuntu に SMB マウントに必要なツールのインストールを行います。
+
+`sudo apt install cifs-utils`
+
+`sudo apt install smbclient`
+
+`sudo reboot`
+
+`sudo service apache2 start`
 
 
 ## Amazon RDS の構築
