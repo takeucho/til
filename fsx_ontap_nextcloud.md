@@ -100,7 +100,7 @@ FSx for ONTAP を NFS マウントします（FSx for ONTAP の NFS IP アドレ
 `sudo cp -piR /var/www/nextcloud/data_back/. /var/www/nextcloud/data`
 
 ## Nextcloud でSMB 共有を使用する
-上記の　NFS　共有だけでも Nextcloud を FSx for ONTAP をバックエンドストレージとしたクラウドストレージとして利用することができます。しかし、今回は Windows クライアントから使用したいため、FSx for ONTAP を SMB マウントできるように設定します。
+上記の NFS 共有だけでも Nextcloud を FSx for ONTAP をバックエンドストレージとしたクラウドストレージとして利用することができます。しかし、今回は Windows クライアントから使用したいため、FSx for ONTAP を SMB マウントできるように設定します。
 
 Nextcloudをインストールした Ubuntu に SMB マウントに必要なツールのインストールを行います。
 
