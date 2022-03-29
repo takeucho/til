@@ -140,6 +140,15 @@ Nextcloud の管理者権限で GUI からログインし、Apps から "LDAP us
 
 ![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_share.png)
 
+## 多要素認証（MFA）の有効化
+Nextcloud の "Two-Factor TOTP Provider" アプリケーションをインストールすることにより、Nextcloud のユーザを多要素認証で保護することができます。
+
+![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_apps2.png)
+
+インストール後の設定は、Personal の "Security" から "Enable TOTP" にチェックを入れることで QR コードが表示され、Google Authenticator などのスマートフォンの認証アプリと連携させることが可能です。連携させると、ログイン時に認証アプリで表示されるワンタイムパスワードの入力が必要となります。
+
+![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_totp.png)
+
 ## Nextcloud　サーバの冗長化
 Nextcloud サーバを冗長化するため、ここまで構成した EC2 を AMI として保存し、AMI から複製となる EC2 を作成します。
 
