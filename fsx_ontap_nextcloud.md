@@ -30,6 +30,31 @@ https://docs.nextcloud.com/server/latest/admin_manual/installation/example_ubunt
 #### 注意点
 Snap Package を使用してインストールした場合、NextCloud をインストールしている Ubuntu への cifs-utils のインストールがうまくいかなかったため、FSx for ONTAP などの SMB ファイルサーバをマウントさせることはできませんでした。
 
+## Amazon RDS の構築
+上記で構築した Nextcloud サーバのデータベースを Amazon RDS に置きかえるため、下記ドキュメントを参照して Amazon RDS を構築します。
+
+https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateDBInstance.html
+
+Nextcloudをインストールした Ubuntu に Maria DB クライアントをインストールし、RDS にアクセスできることを確認します。
+
+`sudo apt install -y mariadb-client`
+
+## Amazon ElastiCache の構築
+メモリキャッシュを利用して高速化するために、下記ドキュメントを参照して Amazon ElastiCache を Redis で構築します。
+https://aws.amazon.com/jp/getting-started/hands-on/building-fast-session-caching-with-amazon-elasticache-for-redis/1/
+
+Redis の設定を config.php に追加します。
+
+`sudo vi /var/www/nextcloud/config/config.php`
+
+~~~
+'memcache.distributed' => '\OC\Memcache\Redis',
+  'memcache.locking' => '\\OC\\Memcache\\Redis',
+  'redis' => [
+     'host' => 'nextcloud-redis.z6xxxx.ng.0001.apne1.cache.amazonaws.com',
+     'port' => 6379,
+~~~
+
 ## Nextcloud の標準ファイルディレクトリとして FSx for ONTAP の NFS 共有を使用する
 今回、NextCloud は 2 台の EC2 で冗長化するため、標準コンテンツを格納するファイルディレクトリ（ /var/www/nextcloud/data/ ）として FSx for ONTAP の NFS 共有を使用する設定を行います。
 
@@ -74,7 +99,10 @@ Nextcloud の管理者権限で GUI からログインし、Apps から "LDAP us
 ![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_apps.png)
 
 設定画面の "LDAP/AD integration" から Active Directory への参加設定を行います。
-その後、 設定画面の Administration の "External storage" から外部ストレージの設定として FSx for ONTAP をマウントする設定を行います。
+
+![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_ldap.png)
+
+設定画面の Administration の "External storage" から外部ストレージの設定として FSx for ONTAP をマウントする設定を行います。
 また、"Allow users to mount external storage" と "SMB/CIFS" にチェックを入れることで、各ユーザ自身が自身のホームフォルダをマウントする設定ができるようになります。
 
 ![alt](https://github.com/takeucho/til/blob/main/images/external_storage.png)
@@ -82,31 +110,6 @@ Nextcloud の管理者権限で GUI からログインし、Apps から "LDAP us
 上記設定を行うことで、Nextcloud の Files 画面で FSx for ONTAP の SMB 共有が "FSxN" として表示され、アクセスできるようになります。
 
 ![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_files.png)
-
-## Amazon RDS の構築
-上記で構築した Nextcloud サーバのデータベースを Amazon RDS に置きかえるため、下記ドキュメントを参照して Amazon RDS を構築します。
-
-https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateDBInstance.html
-
-Nextcloudをインストールした Ubuntu に Maria DB クライアントをインストールします。
-
-`sudo apt install -y mariadb-client`
-
-## Amazon ElastiCache の構築
-メモリキャッシュを利用して高速化するために、下記ドキュメントを参照して Amazon ElastiCache を Redis で構築します。
-https://aws.amazon.com/jp/getting-started/hands-on/building-fast-session-caching-with-amazon-elasticache-for-redis/1/
-
-Redis の設定を config.php に追加します。
-
-`sudo vi /var/www/nextcloud/config/config.php`
-
-~~~
-'memcache.distributed' => '\OC\Memcache\Redis',
-  'memcache.locking' => '\\OC\\Memcache\\Redis',
-  'redis' => [
-     'host' => 'nextcloud-redis.z6xxxx.ng.0001.apne1.cache.amazonaws.com',
-     'port' => 6379,
-~~~
 
 ## Amazon Elastic Load Balancing の構築
 Nextcloud サーバを冗長化するため、下記ドキュメントを参照して Amazon Elastic Load Balancing を構築します。
