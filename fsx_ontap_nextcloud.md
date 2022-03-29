@@ -149,7 +149,7 @@ Nextcloud の "Two-Factor TOTP Provider" アプリケーションをインスト
 
 ![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_totp.png)
 
-## Nextcloud　サーバの冗長化
+## Nextcloud サーバの冗長化
 Nextcloud サーバを冗長化するため、ここまで構成した EC2 を AMI として保存し、AMI から複製となる EC2 を作成します。
 
 ## Amazon Elastic Load Balancing の構築
