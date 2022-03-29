@@ -130,10 +130,13 @@ Nextcloud の管理者権限で GUI からログインし、Apps から "LDAP us
 
 ![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_files.png)
 
-これにより、Nextcloud から FSxN フォルダに書き込んだファイルは Windows からマウントしている同一の SMB 共有から読み取り・変更ができます。また、同様に Windows のエクスプローラから SMB 共有に対して書き込んだファイルは、Nextcloud の FSxN フォルダで読み取り・変更ができます。 Nextcloud と Windows で同一の Active Directory に参加しているため、アクセス権限も機能します。
+これにより、Nextcloud から FSxN フォルダに書き込んだファイルは Windows からマウントしている同一の SMB 共有から読み取り・変更ができます。また、同様に Windows のエクスプローラから SMB 共有に対して書き込んだファイルは、Nextcloud の FSxN フォルダで読み取り・変更ができます。 
+
+## Nextcloud　サーバの冗長化
+Nextcloud サーバを冗長化するため、ここまで構成した EC2 を AMI として保存し、AMI から複製となる EC2 を作成します。
 
 ## Amazon Elastic Load Balancing の構築
-Nextcloud サーバを冗長化するため、下記ドキュメントを参照して Amazon Elastic Load Balancing を構築します。
+上記 2 台の Nextcloud サーバを冗長化するため、下記ドキュメントを参照して Amazon Elastic Load Balancing を構築します。
 https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/create-application-load-balancer.html
 
 Elastic Load Balancing の設定を config.php に追加します。
@@ -149,5 +152,4 @@ array (
 'overwritehost' => 'ec2-xx-xxx-x-xxx.ap-northeast-1.compute.amazonaws.com',
 ~~~
 
-
-## Nextcloud の設定
+以上
