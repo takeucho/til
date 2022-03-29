@@ -5,8 +5,8 @@
 
 ![alt](https://github.com/takeucho/til/blob/main/images/fsx-ontap-nextcloud.png)
 
-本記事は個人が作成したものであり、AWS社やNextcloud社とは一切関係ありません。
-本記事を参考に環境構築を行い何らかの障害や損害が発生しても、一切の責任は負いませんので自己責任でご参照ください。
+- 本記事は個人が作成したものであり、AWS社やNextcloud社とは一切関係ありません。
+- 本記事を参考に環境構築を行い何らかの障害や損害が発生しても一切の責任は負いませんので、自己責任でご参照ください。
 
 #### 対象読者
 FSx for ONTAP、Amazon RDS、Amazon Elastic Load Balancing、Amazon ElastiCache、Nextcloud の知識を有している人。
