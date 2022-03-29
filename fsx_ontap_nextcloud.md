@@ -90,7 +90,7 @@ Redis の設定を config.php に追加します。
 'memcache.distributed' => '\OC\Memcache\Redis',
   'memcache.locking' => '\\OC\\Memcache\\Redis',
   'redis' => [
-     'host' => 'nextcloud-redis.z6btfm.ng.0001.apne1.cache.amazonaws.com',
+     'host' => 'nextcloud-redis.z6xxxx.ng.0001.apne1.cache.amazonaws.com',
      'port' => 6379,
 ~~~
 
@@ -108,7 +108,7 @@ array (
 0 => '10.11.0.0/16',
 ),
 'overwriteprotocol' => 'https',
-'overwritehost' => 'ec2-13-230-9-117.ap-northeast-1.compute.amazonaws.com',
+'overwritehost' => 'ec2-xx-xxx-x-xxx.ap-northeast-1.compute.amazonaws.com',
 ~~~
 
 
