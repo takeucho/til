@@ -1,11 +1,11 @@
 # Amazon FSx for NetApp ONTAP と Nextcloud で実現するファイルサーバ兼クラウドストレージ環境
 
-この記事では Amazon FSx for NetApp ONTAP と Nextcloud を使って、SMBファイルサーバ兼クラウドストレージとしてシームレスに使える環境構築の連携手順と構築時の注意点を紹介します。
+この記事では Amazon FSx for NetApp ONTAP と Nextcloud を使って、SMB ファイルサーバ兼クラウドストレージとしてシームレスに使える環境構築の連携手順と構築時の注意点を紹介します。
 最終的な想定構成は以下となります（本記事ではオンプレミス環境からのアクセスに関する設定については記載していません）。
 
 ![alt](https://github.com/takeucho/til/blob/main/images/fsx-ontap-nextcloud.png)
 
-- 本記事は個人が作成したものであり、AWS社やNextcloud社とは一切関係ありません。
+- 本記事は個人が作成したものであり、AWS 社や Nextcloud 社とは一切関係ありません。
 - 本記事を参考に環境構築を行い何らかの障害や損害が発生しても一切の責任は負いませんので、自己責任でご参照ください。
 
 #### 対象読者
