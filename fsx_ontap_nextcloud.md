@@ -127,7 +127,8 @@ Nextcloud の管理者権限で GUI からログインし、Apps から "LDAP us
 ![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_ldap.png)
 
 設定画面の Administration の "External storage" から外部ストレージの設定として FSx for ONTAP をマウントする設定を行います。
-また、"Allow users to mount external storage" と "SMB/CIFS" にチェックを入れることで、各ユーザ自身が自身のホームフォルダをマウントする設定ができるようになります。
+
+また、"Allow users to mount external storage" と "SMB/CIFS" にチェックを入れることで、各ユーザ自身が自身のホームフォルダをマウントする設定が行えるようになります。
 
 ![alt](https://github.com/takeucho/til/blob/main/images/external_storage.png)
 
