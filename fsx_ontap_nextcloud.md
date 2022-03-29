@@ -40,7 +40,7 @@ Nextcloudをインストールした Ubuntu に Maria DB クライアントを�
 
 `sudo apt install -y mariadb-client`
 
-DB として RDS を参照するように config.php を修正します。
+Nextcloud が DB として RDS を参照するように config.php を修正します。
 
 `sudo vi /var/www/nextcloud/config/config.php`
 
