@@ -112,9 +112,7 @@ Nextcloudをインストールした Ubuntu に SMB マウントに必要なツ�
 
 `sudo service apache2 start`
 
-Nextcloud で Active Directory への参加と SMB マウントができるようにアプリケーションをインストールします。
-
-まず、Active Directory に 参加するための LDAP アプリケーションが使えるように php-ldap をインストールします。
+Active Directory に 参加するための LDAP アプリケーションが使えるように php-ldap をインストールします。
 
 `sudo apt install php-ldap`
 
