@@ -39,6 +39,24 @@ Nextcloudをインストールした Ubuntu に Maria DB クライアントを�
 
 `sudo apt install -y mariadb-client`
 
+DB として RDS を参照するように config.php を修正します。
+
+`sudo vi /var/www/nextcloud/config/config.php`
+
+~~~
+  'dbtype' => 'mysql',
+  'version' => '22.2.3.0',
+  'overwrite.cli.url' => 'http://10.11.0.46/nextcloud',
+  'dbname' => 'nextcloud',
+  'dbhost' => 'nextcloud-database-01.cnixxxxxxxx.ap-northeast-1.rds.amazonaws.com',
+  'dbport' => '',
+  'dbtableprefix' => 'oc_',
+  'mysql.utf8mb4' => true,
+  'dbuser' => 'ncdbuser',
+  'dbpassword' => 'password',
+  'installed' => true,
+~~~
+
 ## Amazon ElastiCache の構築
 メモリキャッシュを利用して高速化するために、下記ドキュメントを参照して Amazon ElastiCache を Redis で構築します。
 https://aws.amazon.com/jp/getting-started/hands-on/building-fast-session-caching-with-amazon-elasticache-for-redis/1/
