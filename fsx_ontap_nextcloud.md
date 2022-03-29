@@ -132,6 +132,8 @@ Nextcloud の管理者権限で GUI からログインし、Apps から "LDAP us
 
 これにより、Nextcloud から FSxN フォルダに書き込んだファイルは Windows からマウントしている同一の SMB 共有から読み取り・変更ができます。また、同様に Windows のエクスプローラから SMB 共有に対して書き込んだファイルは、Nextcloud の FSxN フォルダで読み取り・変更ができます。 
 
+![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_share.png)
+
 ## Nextcloud　サーバの冗長化
 Nextcloud サーバを冗長化するため、ここまで構成した EC2 を AMI として保存し、AMI から複製となる EC2 を作成します。
 
