@@ -138,9 +138,15 @@ Nextcloud の管理者権限で GUI からログインし、Apps から "LDAP us
 
 これにより、Nextcloud から FSxN フォルダに書き込んだファイルは Windows からマウントしている同一の SMB 共有から読み取り・変更ができます。また、同様に Windows のエクスプローラから SMB 共有に対して書き込んだファイルは、Nextcloud の FSxN フォルダで読み取り・変更ができます。 
 
-![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_folder.png)
+WindowsのエクスプローラでマウントしたSMB共有を表示
 
 ![alt](https://github.com/takeucho/til/blob/main/images/Windows_share.png)
+
+Nextcloud上のフォルダを表示
+
+![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_folder.png)
+
+SMB共有とNextcloud上のフォルダの紐付け例
 
 ![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_share.png)
 
