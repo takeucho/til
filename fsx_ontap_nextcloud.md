@@ -58,7 +58,7 @@ Nextcloud が DB として RDS を参照するように config.php を修正し�
   'installed' => true,
 ~~~
 
-## Amazon ElastiCache の構築
+## Amazon ElastiCache の構築（オプション）
 メモリキャッシュを利用して高速化するために、下記ドキュメントを参照して Amazon ElastiCache を Redis で構築します。
 https://aws.amazon.com/jp/getting-started/hands-on/building-fast-session-caching-with-amazon-elasticache-for-redis/1/
 
@@ -150,7 +150,7 @@ SMB共有とNextcloud上のフォルダの紐付け例
 
 ![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_share.png)
 
-## 多要素認証（MFA）の有効化
+## 多要素認証（MFA）の有効化（オプション）
 Nextcloud の "Two-Factor TOTP Provider" アプリケーションをインストールすることにより、Nextcloud のユーザを多要素認証で保護することができます。
 
 ![alt](https://github.com/takeucho/til/blob/main/images/nextcloud_apps2.png)
